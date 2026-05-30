@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, viewport-fit=cover">
 		<title>Family Garden MVP v2</title>
 		<style>
 html, body, #canvas {
@@ -11,19 +11,67 @@ html, body, #canvas {
 	border: 0;
 }
 
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
 body {
 	color: white;
 	background-color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	overflow: hidden;
+	position: fixed;
+	inset: 0;
 	touch-action: none;
+	overscroll-behavior: none;
 }
 
 #canvas {
 	display: block;
+	left: 50% !important;
+	width: min(100vw, 177.7778vh) !important;
+	height: min(100vh, 56.25vw) !important;
+	max-width: 100vw;
+	max-height: 100vh;
+	position: fixed !important;
+	top: 50% !important;
+	transform: translate(-50%, -50%) !important;
+	transform-origin: center center;
 }
 
 #canvas:focus {
 	outline: none;
+}
+
+#rotate-notice {
+	align-items: center;
+	background-color: rgba(0, 0, 0, 0.84);
+	box-sizing: border-box;
+	color: white;
+	display: none;
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	font-size: 1rem;
+	font-weight: 600;
+	inset: 0;
+	justify-content: center;
+	line-height: 1.35;
+	padding: 2rem;
+	position: fixed;
+	text-align: center;
+	z-index: 2;
+}
+
+@media (orientation: portrait) and (max-width: 800px) {
+	#canvas {
+		opacity: 0.35;
+	}
+
+	#rotate-notice {
+		display: flex;
+	}
 }
 
 #status, #status-splash, #status-progress {
@@ -98,6 +146,8 @@ body {
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
 		</canvas>
+
+		<div id="rotate-notice">Rotate your phone to landscape.</div>
 
 		<noscript>
 			Your browser does not support JavaScript.
@@ -217,4 +267,3 @@ const engine = new Engine(GODOT_CONFIG);
 		</script>
 	</body>
 </html>
-
